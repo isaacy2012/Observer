@@ -1,14 +1,18 @@
 export class Item {
-    text: string
-    input: boolean
+    text: string;
+    input: boolean;
 
     constructor(text: string, input: boolean) {
-        this.text = text
-        this.input = input
+        this.text = text;
+        this.input = input;
     }
 
     static empty(): Item {
-        return new Item("", false)
+        return new Item("", true);
+    }
+
+    toString(): String {
+        return this.text + ", " + this.input
     }
 
 }

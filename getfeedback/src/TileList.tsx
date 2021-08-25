@@ -6,7 +6,7 @@ export function TileList(props: { items: Item[], updateText: (index: number, new
     return (
         <ul>{
             props.items.map((x, i) => {
-                return <Tile text ={x} updateText={newText => props.updateText(i, newText)}/>
+                return <Tile item={x} updateText={newText => props.updateText(i, newText)}/>
             })
         }</ul>
     );

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {TileList} from './TileList';
 import {Item} from "./Item";
@@ -10,10 +10,24 @@ function App() {
     function updateText(i: number, newText: string) {
         setItems(items => {
             const newItems = [...items];
-            newItems[i] = new Item(newText,true);
+            newItems[i] = new Item(newText,false);
             return newItems;
         })
     }
+
+
+    useEffect(() => {
+        // If no items are inputs
+        if (items.filter(x => x.input).length === 0) {
+            // Add a new item to the list
+            setItems(items => {
+                const newItems = [...items];
+                newItems.push(Item.empty())
+                return newItems;
+            })
+        }
+    }, [items])
+
 
     return (
         <div className="App">
