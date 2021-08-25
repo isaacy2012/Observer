@@ -1,26 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { TileList } from './TileList';
+
+const items: string[] = ["Good comment", "Bad Comment", "Medium Comment"]
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Welcome to COURSE NAME
         </p>
         <p>
             By Isaac Young and George Powell
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <TileList items={items}/>
       </header>
     </div>
   );
