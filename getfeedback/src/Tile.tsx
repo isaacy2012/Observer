@@ -1,19 +1,20 @@
 import React, {useState} from 'react';
 import {Item} from "./Item";
 
-export function Tile(props: {item: Item, updateText: (newText:string) => void}) {
+export function Tile(props: {item: Item, updateText: (newText:string, input:boolean) => void}) {
+    const {item, updateText} = props;
     return (
-        props.item.input?
+        item.input?
             <li>
             <input id="textInput" type="text" onKeyPress={event => {
                 if (event.key === 'Enter') {
                     const text: string = (document.getElementById("textInput") as HTMLInputElement).value;
-                    props.updateText(text);
+                    updateText(text,false);
                 }
             }} autoFocus/>
             </li>
         :
-        <li>Tile: {props.item.text}</li>
+        <li onClick={e => updateText(item.text,true)}>Tile: {props.item.text}</li>
     );
 }
 

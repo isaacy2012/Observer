@@ -7,10 +7,10 @@ import {Item} from "./Item";
 function App() {
     const [items, setItems] = useState([Item.empty()])
 
-    function updateText(i: number, newText: string) {
+    function updateTile(i: number, newText: string, input: boolean) {
         setItems(items => {
             const newItems = [...items];
-            newItems[i] = new Item(newText,false);
+            newItems[i] = new Item(newText,input,"");
             return newItems;
         })
     }
@@ -38,7 +38,7 @@ function App() {
                 <p>
                     By Isaac Young and George Powell
                 </p>
-                <TileList items={items} updateText={updateText}/>
+                <TileList items={items} updateText={updateTile}/>
             </header>
         </div>
     );
