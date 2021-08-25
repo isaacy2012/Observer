@@ -1,29 +1,17 @@
 import React, {useState} from 'react';
 import './App.css';
 import {TileList} from './TileList';
+import {Item} from "./Item";
 
-
-class Item {
-    text: string
-    input: boolean
-
-    constructor(text: string, input: boolean) {
-        this.text = text
-        this.input = input
-    }
-
-    static empty(): Item {
-        return new Item("", false)
-    }
-
-}
 
 function App() {
     const [items, setItems] = useState([Item.empty()])
 
     function updateText(i: number, newText: string) {
         setItems(items => {
-            return items.map((x, index) => index === i ? {newText}:{x});
+            const newItems = [...items];
+            newItems[i] = new Item(newText,true);
+            return newItems;
         })
     }
 
