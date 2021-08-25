@@ -1,10 +1,19 @@
 import React, {useState} from 'react';
 
-export function Tile(props: {str: string, upDateText: (a:string) => void}) {
+export function Tile(props: {str: string, updateText: (a:string) => void}) {
     const [toRender,setRender] = useState(false)
     return (
-        toRender? <i>sus</i> :
-        <li onClick= { e => setRender(toRender => true)} >Tile: {props.str}</li>
+        toRender?
+            <li>
+            <input id="textInput" type="text" onKeyPress={event => {
+                if (event.key === 'Enter') {
+                    props.updateText((document.getElementById("textInput") as HTMLInputElement).value)
+                    setRender(toRender => false)
+                }
+            }} autoFocus/>
+            </li>
+        :
+        <li onClick= { () => setRender(toRender => true)} >Tile: {props.str}</li>
     );
 }
 
