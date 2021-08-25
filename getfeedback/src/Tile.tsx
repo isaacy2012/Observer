@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-export function Tile(props: {str: string}) {
+export function Tile(props: {str: string, upDateText: (a:string) => void}) {
+    const [toRender,setRender] = useState(false)
     return (
-        <li>Tile: {props.str}</li>
+        toRender? <i>sus</i> :
+        <li onClick= { e => setRender(toRender => true)} >Tile: {props.str}</li>
     );
 }
 
