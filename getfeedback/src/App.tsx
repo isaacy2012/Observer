@@ -3,6 +3,10 @@ import './App.css';
 import {TileList} from './TileList';
 import {Item} from "./Item";
 
+ function callApi() {
+      fetch("http://localhost:9000/testAPI")
+         .then(res => console.log(res.text()))
+ }
 
 function App() {
     const [items, setItems] = useState([Item.empty()])
@@ -17,6 +21,7 @@ function App() {
 
 
     useEffect(() => {
+        callApi()
         // If no items are inputs
         if (items.filter(x => x.input).length === 0) {
             // Add a new item to the list
@@ -35,6 +40,7 @@ function App() {
                 <p>
                     Welcome to COURSE NAME
                 </p>
+                <p></p>
                 <p>
                     By Isaac Young and George Powell
                 </p>
