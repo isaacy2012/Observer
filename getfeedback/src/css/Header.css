@@ -1,0 +1,48 @@
+.header {
+    background-color: #E6FAE4;
+    padding: 2em;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+.leftColumn {
+    text-align: left
+}
+
+.middleColumn {
+    text-align: center
+}
+
+.rightColumn {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h1 {
+    font-size: max(20px, 2.5vw);
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+h3 {
+    font-size: max(13px, 1vw);
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 0
+}
+

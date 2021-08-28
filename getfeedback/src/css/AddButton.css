@@ -1,0 +1,28 @@
+.addButton {
+    background-color: #F1F1F1;
+    height: 2.5em;
+    width: 30vw;
+    border-radius: 10px;
+    margin: 25px auto 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.addButtonText {
+    margin: 0;
+    pointer-events: none;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
