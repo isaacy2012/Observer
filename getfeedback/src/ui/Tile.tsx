@@ -8,7 +8,6 @@ export function Tile(props: {index: number, item: Item, onClick: (index: number)
     const {index, item, onClick} = props;
     return (
         <Card className="bsCard" onClick={() => {onClick(index)}}>
-            <Card.Title>{item.title}</Card.Title>
             <Card.Body>{item.text}</Card.Body>
         </Card>
     );

@@ -1,7 +1,9 @@
 .addButton {
     background-color: #F1F1F1;
     height: 2.5em;
+    max-width: max(1000px, 30vw);
     width: 30vw;
+    min-width: min(500px, 90vw);
     border-radius: 10px;
     margin: 25px auto 10px;
     padding-left: 20px;

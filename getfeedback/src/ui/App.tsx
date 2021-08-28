@@ -4,7 +4,8 @@ import '../css/Grid.css'
 import {Item} from "../model/Item";
 import {Header} from './Header';
 import {FlexGrid} from './FlexGrid';
-import { AddButton } from './AddButton';
+import {AddButton} from './AddButton';
+import {InputModal} from './InputModal';
 
 function callApi() {
     fetch("http://localhost:9000/testAPI")
@@ -13,34 +14,24 @@ function callApi() {
 
 function App() {
     const [items, setItems] = useState([
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
-        new Item("Test Title", "Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
+        new Item("Test message the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"),
     ])
     const [title, setTitle] = useState("Course Title")
     const [originalPosterName, setOriginalPosterName] = useState("PosterName")
+    const [showModal, setShowModal] = useState(false)
 
     function onClick() {
-        console.log("onclick");
+        setShowModal(true);
+    }
+
+    function closeModal() {
+        setShowModal(false);
+    }
+
+    function addItem(item: Item) {
+        setItems(
+            [...items, item]
+        )
     }
 
     function cardOnClick(index: number) {
@@ -52,6 +43,7 @@ function App() {
             <Header logo={<p>Observe</p>} title={title} originalPosterName={originalPosterName}/>
             <AddButton onClick={onClick}/>
             <FlexGrid messages={items} onClick={cardOnClick}/>
+            <InputModal show={showModal} onClickPositive={addItem} handleClose={closeModal}/>
         </div>
     );
 }
