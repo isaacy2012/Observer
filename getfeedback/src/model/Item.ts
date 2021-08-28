@@ -1,14 +1,12 @@
 export class Item {
-    title: string;
     text: string;
 
-    constructor(title: string, text: string) {
-        this.title = title;
+    constructor(text: string) {
         this.text = text;
     }
 
     static empty(): Item {
-        return new Item("", "");
+        return new Item("");
     }
 
     toString(): String {

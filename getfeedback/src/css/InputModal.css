@@ -1,0 +1,43 @@
+textarea {
+    margin: 10%;
+    margin-top: 0;
+    background: none;
+    border: none;
+    outline: none;
+    resize: none;
+    width: 80%;
+    min-height: 100px;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.modalsp {
+    top: 20vh;
+    max-width: max(1000px, 30vw);
+    width: 30vw;
+    min-width: min(500px, 90vw);
+    box-shadow: 0 8px 48px rgba(0, 0, 0, 0.1);
+    outline: none;
+    border-radius: 10px;
+}
+
+
+.modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+    border-top: 0 none;
+}
+
+.modal-content {
+    background: #FFFEFB;
+    border: none !important;
+    outline: none !important;
+}
+
+.modal-backdrop {
+    background: none;
+}

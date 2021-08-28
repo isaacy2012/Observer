@@ -13,6 +13,7 @@ export function FlexGrid(props: { messages: Item[], onClick: (index: number) => 
                  columnClassName="my-masonry-grid_column">
             {messages.map((x, i) => <Tile key={i} index={i} item={x} onClick={onClick}/>)}
         </Masonry>
+
 );
 }
 
