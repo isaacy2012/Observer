@@ -15,15 +15,14 @@ export async function DBgetAll() {
 }
 
 //Add an item to the database by sending a post request and returning the id of item added to db
-export async function DBaddItem(data: Item) {
+export async function DBAddItem(itemToAdd: Item): Promise<Item> {
     const response = await fetch('http://localhost:9000/add-item', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(itemToAdd)
     });
-    let _id;
-    await response.json().then(data => _id = data._id);
-    return _id;
+    await response.json().then(response => itemToAdd._id = response._id);
+    return itemToAdd;
 }
