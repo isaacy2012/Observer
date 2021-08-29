@@ -26,3 +26,16 @@ export async function DBAddItem(itemToAdd: Item): Promise<Item> {
     await response.json().then(response => itemToAdd.id = response._id);
     return itemToAdd;
 }
+
+//Update an item in database by sending a post request and returning true if successful otherwise false
+export async function DBUpsertItem(itemToAdd: Item): Promise<Item> {
+    const response = await fetch('http://localhost:9000/upsert-item', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(itemToAdd)
+    });
+    await response.json().then(response => itemToAdd.id = response._id);
+    return itemToAdd;
+}
