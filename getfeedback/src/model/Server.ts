@@ -2,13 +2,13 @@ import {Item} from "./Item";
 
 
 //Fetch all items from database by get requesting the server
-export async function DBgetAll() {
-    const items: Item[] = [];
+export async function DBgetAll(): Promise<Map<string, Item>> {
+    const items: Map<string, Item> = new Map();
     const response = await fetch('http://localhost:9000/get-items');
     await response.json().then(data => {
         for(let i = 0; i<data.length; i++) {
             const {text,_id,likes}=data[i];
-            items.push(new Item(text,_id,likes))
+            items.set(_id, new Item(text,_id,likes))
         }
     });
     return items;
@@ -23,6 +23,6 @@ export async function DBAddItem(itemToAdd: Item): Promise<Item> {
         },
         body: JSON.stringify(itemToAdd)
     });
-    await response.json().then(response => itemToAdd._id = response._id);
+    await response.json().then(response => itemToAdd.id = response._id);
     return itemToAdd;
 }

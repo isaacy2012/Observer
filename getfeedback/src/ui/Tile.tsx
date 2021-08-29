@@ -32,10 +32,10 @@ function getHexColorFromLikes(hue: number, maxLikes: number, thisLikes: number):
     }
 }
 
-const styles = (likes: number) => {
+const styles = (maxLikes: number, likes: number) => {
     return StyleSheet.create({
         card: {
-            backgroundColor: getHexColorFromLikes(115, 10, likes),
+            backgroundColor: getHexColorFromLikes(115, maxLikes, likes),
             textAlign: "left",
             borderRadius: "10px",
             margin: "20px",
@@ -45,8 +45,8 @@ const styles = (likes: number) => {
     })
 }
 
-export function Tile(props: { index: number, item: Item, onClick: (index: number) => void }) {
-    const {index, item, onClick} = props;
+export function Tile(props: { maxLikes: number, item: Item, onClick: (index: string) => void }) {
+    const {maxLikes, item, onClick} = props;
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [liked, setLiked] = useState(false);
 
@@ -55,10 +55,14 @@ export function Tile(props: { index: number, item: Item, onClick: (index: number
     }
 
     return (
-        <Card className={css(styles(item.likes).card)}>
+        <Card className={css(styles(maxLikes, item.likes).card)}>
             <Card.Body>{item.text}</Card.Body>
             <LikeModule isLiked={false} likes={item.likes} onClick={() => {
-                onClick(index);
+                if (item.id !== null) {
+                    onClick(item.id);
+                } else {
+                    alert("Error syncing with database. Please refresh and try again.");
+                }
                 setShouldUpdate(true);
             }}/>
         </Card>
