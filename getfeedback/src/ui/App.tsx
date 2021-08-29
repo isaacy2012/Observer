@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import '../css/App.css';
 import '../css/FlexGrid.css'
 import {Item} from "../model/Item";
@@ -6,7 +6,6 @@ import {Header} from './Header';
 import {FlexGrid} from './FlexGrid';
 import {AddButton} from './AddButton';
 import {InputModal} from './InputModal';
-import {getAll} from '../model/Server';
 
 
 function App() {
@@ -30,8 +29,6 @@ function App() {
             [...items, item]
         )
     }
-
-    useEffect( () => console.log(getAll()));
 
     function cardOnClick(index: number) {
         let newItems = items;
