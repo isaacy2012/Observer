@@ -4,11 +4,21 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors')
-const testAPIRouter = require("./routes/testAPI");
-const { MongoClient } = require('mongodb');
+const indexRouter = require('./routes');
+const usersRouter = require('./routes/users');
+const getItemsRouter = require('./routes/getItems');
+const addItemRouter = require('./routes/addItem')
+const mongoose = require('mongoose');
 
 const app = express();
 
+//Connecting to MongoDB
+const uri = "mongodb+srv://dbUser:mO6XYe70n1Htw08A@cluster0.n3bdm.mongodb.net/Observer?retryWrites=true&w=majority";
+mongoose.connect(uri).then(res=>console.log("Connected to db"));
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(cors());
@@ -16,7 +26,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use("/testAPI", testAPIRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/get-items',getItemsRouter);
+app.use('/add-item',addItemRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -35,16 +48,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-//Setting up MongoDB
-const uri = "mongodb+srv://dbUser:mO6XYe70n1Htw08A@cluster0.n3bdm.mongodb.net/Observer?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-c();
-async function c(){
-  const collection = (await client.connect()).db("Observer").collection("Messages");
-  const doc = {name: "Neapolitan pizza", shape: "round"};
-  const result = await collection.insertOne(doc);
-  console.log(
-      `A document was inserted with the _id: ${result.insertedId}`,);
-  await client.close();
-}

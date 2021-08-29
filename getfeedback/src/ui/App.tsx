@@ -6,11 +6,8 @@ import {Header} from './Header';
 import {FlexGrid} from './FlexGrid';
 import {AddButton} from './AddButton';
 import {InputModal} from './InputModal';
+import {getAll} from '../model/Server';
 
-function callApi() {
-    fetch("http://localhost:9000/testAPI")
-        .then(res => console.log(res.text()))
-}
 
 function App() {
     const [items, setItems] = useState([
@@ -33,11 +30,11 @@ function App() {
             [...items, item]
         )
     }
+    useEffect( () => console.log(getAll()));
 
     function cardOnClick(index: number) {
         console.log("card click: " + index.toString());
     }
-
     return (
         <div className="App">
             <Header logo={<p>Observe</p>} title={title} originalPosterName={originalPosterName}/>
