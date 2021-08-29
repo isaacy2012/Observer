@@ -4,6 +4,7 @@ import "../css/InputModal.css"
 import {useEffect, useRef, useState} from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 
+
 export function InputModal(props: { show: boolean, onClickPositive: (item: Item) => void, handleClose: () => void }) {
     const {show, onClickPositive, handleClose} = props;
     const textAreaAutoSize = useRef<HTMLTextAreaElement>(null);

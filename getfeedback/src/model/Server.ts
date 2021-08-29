@@ -1,5 +1,6 @@
 import {Item} from "./Item";
 
+
 //Fetch all items from database by get requesting the server
 export async function DBgetAll() {
     const items: Item[] = [];

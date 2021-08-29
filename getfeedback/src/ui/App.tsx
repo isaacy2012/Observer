@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../css/App.css';
-import '../css/Grid.css'
+import '../css/FlexGrid.css'
 import {Item} from "../model/Item";
 import {Header} from './Header';
 import {FlexGrid} from './FlexGrid';
@@ -31,8 +31,12 @@ function App() {
     }
 
     function cardOnClick(index: number) {
-        console.log("card click: " + index.toString());
+        let newItems = items;
+        newItems[index].like();
+        console.log("likes: " + newItems[index].likes);
+        setItems(newItems)
     }
+
     return (
         <div className="App">
             <Header logo={<p>Observe</p>} title={title} originalPosterName={originalPosterName}/>

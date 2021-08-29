@@ -1,0 +1,15 @@
+.like-button {
+    text-align: right;
+}
+
+.likes-text {
+    margin: 0 10px 0 0;
+}
+
+.side-by-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
