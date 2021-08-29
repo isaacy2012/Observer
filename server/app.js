@@ -7,7 +7,8 @@ const cors = require('cors')
 const indexRouter = require('./routes');
 const usersRouter = require('./routes/users');
 const getItemsRouter = require('./routes/getItems');
-const addItemRouter = require('./routes/addItem')
+const addItemRouter = require('./routes/addItem');
+const upsertItemRouter = require('./routes/upsertItem');
 const mongoose = require('mongoose');
 
 const app = express();
@@ -30,6 +31,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/get-items',getItemsRouter);
 app.use('/add-item',addItemRouter);
+app.use('/upsert-item',upsertItemRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
