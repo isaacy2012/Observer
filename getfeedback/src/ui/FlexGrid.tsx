@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import {Item} from "../model/Item";
 import "../css/App.css"
-import "../css/Grid.css"
+import "../css/FlexGrid.css"
 import Masonry from "react-masonry-css"
 import {Tile} from './Tile';
 
