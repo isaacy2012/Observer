@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//Item schema to be used with mongoose for MongoDB
 const itemSchema = new mongoose.Schema({
     text: {
         type:String,

@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../models/item');
 
-// add an Item to the db
+// update an Item in db by Id
 router.post('/', function(req, res) {
-    const {text,likes} = req.body;
+    const {text,likes,_id} = req.body;
     const item = new Item({text,likes});
-    item.save().then(savedItem => res.send(savedItem)).catch(err => res.end());
+    Item.findByIdAndUpdate(_id,item)
+        .then(() => res.send(true))
+        .catch(() => res.send(false));
 });
 
 module.exports = router;
