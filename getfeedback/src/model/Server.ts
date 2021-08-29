@@ -7,8 +7,8 @@ export async function DBgetAll() {
     const response = await fetch('http://localhost:9000/get-items');
     await response.json().then(data => {
         for(let i = 0; i<data.length; i++) {
-            const {text}=data[i];
-            items.push(new Item(text))
+            const {text,_id,likes}=data[i];
+            items.push(new Item(text,_id,likes))
         }
     });
     return items;
