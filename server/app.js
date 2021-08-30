@@ -14,10 +14,10 @@ const mongoose = require('mongoose');
 const app = express();
 
 //Connecting to MongoDB
-const user = 'dbUser';
-const password = 'mO6XYe70n1Htw08';
+const user = 'example'; // put db username here
+const password = 'password'; // put db password here 
 const uri = `mongodb+srv://${user}:${password}A@cluster0.n3bdm.mongodb.net/Observer?retryWrites=true&w=majority`;
-mongoose.connect(uri).then(()=>console.log("Connected to db"));
+mongoose.connect(uri).then(() => console.log("Connected to db"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,17 +31,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/get-items',getItemsRouter);
-app.use('/add-item',addItemRouter);
-app.use('/update-item',updateItemRouter);
+app.use('/get-items', getItemsRouter);
+app.use('/add-item', addItemRouter);
+app.use('/update-item', updateItemRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
