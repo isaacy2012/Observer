@@ -16,7 +16,7 @@ To connect to the database lines 17 and 18 in app.js will need to be replaced wi
 
 To start the server use the follow command in project directory which will start the server listening on port 9000 and connect to the MongoDB database.
 ### `npm start`
-##Features
+## Features
 When up and running the server responds to 3 different routes providing various functionality with the database.   
 ### /get-items route
 This route responds to get requests and sends back the entire collection of items.
