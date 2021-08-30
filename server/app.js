@@ -8,14 +8,16 @@ const indexRouter = require('./routes');
 const usersRouter = require('./routes/users');
 const getItemsRouter = require('./routes/getItems');
 const addItemRouter = require('./routes/addItem');
-const upsertItemRouter = require('./routes/upsertItem');
+const updateItemRouter = require('./routes/updateItem');
 const mongoose = require('mongoose');
 
 const app = express();
 
 //Connecting to MongoDB
-const uri = "mongodb+srv://dbUser:mO6XYe70n1Htw08A@cluster0.n3bdm.mongodb.net/Observer?retryWrites=true&w=majority";
-mongoose.connect(uri).then(res=>console.log("Connected to db"));
+const user = 'dbUser';
+const password = 'mO6XYe70n1Htw08';
+const uri = `mongodb+srv://${user}:${password}A@cluster0.n3bdm.mongodb.net/Observer?retryWrites=true&w=majority`;
+mongoose.connect(uri).then(()=>console.log("Connected to db"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,7 +33,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/get-items',getItemsRouter);
 app.use('/add-item',addItemRouter);
-app.use('/upsert-item',upsertItemRouter);
+app.use('/update-item',updateItemRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
