@@ -25,7 +25,9 @@ function hslToHex(h: number, s: number, l: number) {
 }
 
 function getHexColorFromLikes(hue: number, maxLikes: number, thisLikes: number): string {
-    if (thisLikes <= maxLikes) {
+    if (thisLikes == 0) {
+        return (hslToHex(hue, 0, 95));
+    } else if (thisLikes <= maxLikes) {
         return (hslToHex(hue, thisLikes/maxLikes*53, 95-18*(thisLikes/maxLikes)));
     } else {
         return (hslToHex(hue, 53, 95-18));
