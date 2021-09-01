@@ -29,7 +29,7 @@ export async function DBAddItem(itemToAdd: Item): Promise<Item> {
 
 //Update an item in database by sending a post request and returning true if successful otherwise false
 export async function DBUpdateItem(itemToAdd: Item): Promise<Item> {
-    const response = await fetch('http://localhost:9000/upsert-item', {
+    const response = await fetch('http://localhost:9000/update-item', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

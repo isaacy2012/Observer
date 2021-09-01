@@ -6,7 +6,7 @@ import {Header} from './Header';
 import {FlexGrid} from './FlexGrid';
 import {AddButton} from './AddButton';
 import {InputModal} from './InputModal';
-import {DBAddItem, DBgetAll} from "../model/Server";
+import {DBAddItem, DBgetAll, DBUpdateItem} from "../model/Server";
 
 
 function App() {
@@ -54,10 +54,16 @@ function App() {
     }
 
     function likeItem(id: string) {
-        let newItems = items;
-        newItems.get(id)!!.like();
-        setItems(newItems);
-        setMaxLikes(Math.max(...Array.from(newItems.values()).map(item => item.likes)));
+        let item = items.get(id);
+        if (item == null) {
+            return;
+        }
+        item.like();
+        items.set(id, item);
+        console.log(item);
+        DBUpdateItem(item).then((newItem) => {
+            setShouldUpdate(true);
+        })
     }
 
     return (
