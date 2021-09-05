@@ -7,6 +7,7 @@ import {faHeart, faHeartBroken} from "@fortawesome/free-solid-svg-icons";
 import "../css/App.css"
 import "../css/LikeModule.css"
 import {LikeModule} from "./LikeModule";
+import {UUIDContext} from './App';
 
 /**
  * @param h hue
@@ -25,12 +26,13 @@ function hslToHex(h: number, s: number, l: number) {
 }
 
 function getHexColorFromLikes(hue: number, maxLikes: number, thisLikes: number): string {
+    let calcMaxLikes = maxLikes >= 10 ? maxLikes : 10;
     if (thisLikes == 0) {
         return (hslToHex(hue, 0, 95));
-    } else if (thisLikes <= maxLikes) {
-        return (hslToHex(hue, thisLikes/maxLikes*53, 95-18*(thisLikes/maxLikes)));
+    } else if (thisLikes <= calcMaxLikes) {
+        return (hslToHex(hue, thisLikes / calcMaxLikes * 53, 95 - 18 * (thisLikes / calcMaxLikes)));
     } else {
-        return (hslToHex(hue, 53, 95-18));
+        return (hslToHex(hue, 53, 95 - 18));
     }
 }
 
@@ -47,28 +49,35 @@ const styles = (maxLikes: number, likes: number) => {
     })
 }
 
-export function Tile(props: { maxLikes: number, item: Item, onClick: (index: string) => void }) {
-    const {maxLikes, item, onClick} = props;
+export function Tile(props: { maxLikes: number, item: Item, onLike: (index: string) => void, onUnlike: (index: string) => void }) {
+    const {maxLikes, item, onLike, onUnlike} = props;
     const [shouldUpdate, setShouldUpdate] = useState(false);
-    const [liked, setLiked] = useState(false);
+    let uuid = React.useContext(UUIDContext);
 
     if (shouldUpdate) {
         setShouldUpdate(false);
     }
 
     return (
-        <Card className={css(styles(maxLikes, item.likes).card)}>
+        <Card className={css(styles(maxLikes, item.getNLikes()).card)}>
             <Card.Body>{item.text}</Card.Body>
-            <LikeModule isLiked={false} likes={item.likes} onClick={() => {
-                if (item.id !== null) {
-                    onClick(item.id);
-                } else {
-                    alert("Error syncing with database. Please refresh and try again.");
-                }
-                setShouldUpdate(true);
-            }}/>
+            <LikeModule isLiked={item.hasAlreadyLiked(uuid)} likes={item.getNLikes()}
+                        onLike={() => {
+                            if (item.id !== null) {
+                                onLike(item.id);
+                            } else {
+                                alert("Error syncing with database. Please refresh and try again.");
+                            }
+                            setShouldUpdate(true);
+                        }}
+                        onUnlike={() => {
+                            if (item.id !== null) {
+                                onUnlike(item.id);
+                            } else {
+                                alert("Error syncing with database. Please refresh and try again.");
+                            }
+                        }
+                        }/>
         </Card>
     );
 }
-
-

@@ -5,7 +5,7 @@ import {useEffect, useRef, useState} from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 
 
-export function InputModal(props: { show: boolean, onClickPositive: (item: Item) => void, handleClose: () => void }) {
+export function InputModal(props: { show: boolean, onClickPositive: (name: string) => void, handleClose: () => void }) {
     const {show, onClickPositive, handleClose} = props;
     const textAreaAutoSize = useRef<HTMLTextAreaElement>(null);
 
@@ -35,7 +35,7 @@ export function InputModal(props: { show: boolean, onClickPositive: (item: Item)
                 <button type="button" className="btn" aria-label="Close" disabled={shouldDisableAcceptButton()} onClick={
                     () => {
                         if (textAreaAutoSize.current !== null) {
-                            onClickPositive(new Item(textAreaAutoSize.current.value));
+                            onClickPositive(textAreaAutoSize.current.value);
                             handleClose()
                         }
                     }

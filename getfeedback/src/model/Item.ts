@@ -1,18 +1,33 @@
 export class Item {
-    id: string | null;
-    likes: number
-    text: string;
     roomId: string;
+    id: string;
+    likes: string[];
+    text: string;
 
-    constructor(text: string, id: string | null = null, likes: number = 0, roomId: string) {
+    constructor(roomId: string, text: string, id: string, likes: string[]) {
+        this.roomId = roomId;
         this.id = id;
         this.text = text;
         this.likes = likes;
-        this.roomId = roomId;
     }
 
-    like() {
-        this.likes++;
+
+    like(uuid: string) {
+        this.likes.push(uuid);
+    }
+
+    unlike(uuid: string) {
+        this.likes = this.likes.filter(function(val, index, arr) {
+            return val !== uuid;
+        });
+    }
+
+    getNLikes() {
+        return this.likes.length;
+    }
+
+    hasAlreadyLiked(uuid: string): boolean {
+        return this.likes.includes(uuid);
     }
 
     toString(): String {

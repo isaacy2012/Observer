@@ -22,16 +22,17 @@ export async function DBgetAll(room: Room): Promise<Map<string, Item>> {
 }
 
 //Add an item to the database by sending a post request and returning the id of item added to db
-export async function DBAddItem(itemToAdd: Item): Promise<Item> {
+export async function DBAddItem(roomId: string, text: string): Promise<Item> {
     const response = await fetch('http://localhost:9000/add-item', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(itemToAdd)
+        body: JSON.stringify({roomId, text})
     });
-    await response.json().then(response => itemToAdd.id = response._id);
-    return itemToAdd;
+    let id = "";
+    await response.json().then(response => id = response._id);
+    return new Item(roomId, text, id, []);
 }
 
 //Update an item in database by sending a post request and returning true if successful otherwise false
@@ -60,7 +61,7 @@ export async function DBAddRoom(roomToAdd: Room): Promise<Room> {
 }
 
 //Update an item in database by sending a post request and returning true if successful otherwise false
-export async function DBGetRoom(pin: String): Promise<Room> {
+export async function DBGetRoom(pin: number): Promise<Room> {
     const response = await fetch('http://localhost:9000/get-item', {
         method: 'POST',
         headers: {
