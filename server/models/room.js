@@ -7,7 +7,7 @@ const roomSchema = new mongoose.Schema({
         required: true
     },
     pin: {
-        type: String,
+        type: "Number",
         required: true
     },
     maker: {
