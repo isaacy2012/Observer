@@ -3,7 +3,7 @@
     display: -ms-flexbox; /* Not needed if autoprefixing */
     display: flex;
     margin-left: max(25px, calc(12.5vw - 100px)); /* gutter size offset */
-    margin-right: 15vw;
+    margin-right: max(25px, calc(12.5vw - 100px));
     width: auto;
 }
 .grid-column {

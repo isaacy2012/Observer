@@ -89,7 +89,7 @@ export function RoomScreen(props: {room: Room}) {
 
     return (
     <div className="App">
-        <Header logo={<p>Observe</p>} title={room.name}
+        <Header logo={<p>Observer</p>} title={room.name}
                 originalPosterName={room.creator}/>
         <AddButton onClick={onClick}/>
         <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values())}

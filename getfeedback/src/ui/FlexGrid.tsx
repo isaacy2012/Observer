@@ -5,10 +5,17 @@ import "../css/FlexGrid.css"
 import Masonry from "react-masonry-css"
 import {Tile} from './Tile';
 
+const breakpointColumns = {
+    default: 3,
+    1100: 3,
+    700: 2,
+    500: 1
+};
+
 export function FlexGrid(props: { maxLikes: number, messages: Item[], onClick: (index: string) => void, onUnlike: (index: string) => void }) {
 
     return (
-        <Masonry breakpointCols={3} className="grid"
+        <Masonry breakpointCols={breakpointColumns} className="grid"
                  columnClassName="my-masonry-grid_column">
             {props.messages.map((item) => <Tile maxLikes={props.maxLikes} key={item.id} item={item}
                                                 onLike={props.onClick} onUnlike={props.onUnlike}/>)}

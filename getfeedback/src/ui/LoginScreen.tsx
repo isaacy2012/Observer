@@ -16,7 +16,7 @@ export function LoginScreen(props: { onSelect: (pin: number, fail: () => void) =
             <div className="header-no-color">
                 <div className="row">
                     <div className="column leftColumn">
-                        {<p>Observe</p>}
+                        {<p>Observer</p>}
                     </div>
                 </div>
             </div>
