@@ -1,0 +1,76 @@
+.login-noscroll {
+    max-height: 100vh;
+    overflow: hidden;
+}
+.login-container {
+    height: max(300px, 100vh);
+}
+
+.login-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: max(300px, 100%);
+}
+
+.login-selector-inner {
+    display: block;
+    text-align: center;
+}
+
+.new-room-text {
+    margin-top: 2em;
+}
+
+.pin-button {
+    margin-top: 0.5em;
+    margin-bottom: 3em;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.go-button {
+    background: #D0EACE;
+    color: black;
+    border: none;
+}
+
+.shake-button{
+    animation: shake 0.5s;
+}
+@keyframes shake {
+    0%  { transform: translate(2px);  }
+    10% { transform: translate(-1px); }
+    20% { transform: translate(-3px);  }
+    30% { transform: translate(0px);  }
+    40% { transform: translate(1px);  }
+    50% { transform: translate(-1px); }
+    60% { transform: translate(-3px);  }
+    70% { transform: translate(2px); }
+    80% { transform: translate(-1px);  }
+    90% { transform: translate(2px);  }
+    100%{ transform: translate(1px); }
+}
+
+.room-create-input {
+    font-size: 1em;
+}
+
+.room-code-input {
+    text-align: center;
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

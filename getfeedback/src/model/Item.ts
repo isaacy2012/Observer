@@ -1,13 +1,16 @@
 export class Item {
-    id: string | null;
+    roomId: string;
+    id: string;
     likes: string[];
     text: string;
 
-    constructor(text: string, id: string | null = null, likes: string[] = []) {
+    constructor(roomId: string, text: string, id: string, likes: string[] = []) {
+        this.roomId = roomId;
         this.id = id;
         this.text = text;
         this.likes = likes;
     }
+
 
     like(uuid: string) {
         this.likes.push(uuid);

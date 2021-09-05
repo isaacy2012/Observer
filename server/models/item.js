@@ -6,6 +6,10 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    roomId: {
+        type: String,
+        required: true
+    },
     likes: {
         type: [String]
     }

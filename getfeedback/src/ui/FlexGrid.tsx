@@ -16,5 +16,3 @@ export function FlexGrid(props: { maxLikes: number, messages: Item[], onClick: (
 
     );
 }
-
-

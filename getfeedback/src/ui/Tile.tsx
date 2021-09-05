@@ -81,5 +81,3 @@ export function Tile(props: { maxLikes: number, item: Item, onLike: (index: stri
         </Card>
     );
 }
-
-
