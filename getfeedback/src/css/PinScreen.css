@@ -1,24 +1,51 @@
-.pin-container {
+.login-noscroll {
+    max-height: 100vh;
+    overflow: hidden;
+}
+.login-container {
     height: max(300px, 100vh);
 }
 
-.pin-selector {
+.login-selector {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: max(300px, 80%);
+    height: max(300px, 100%);
 }
 
-.pin-selector-inner {
+.login-selector-inner {
     display: block;
     text-align: center;
 }
 
-input {
+.new-room-text {
+    margin-top: 2em;
+}
+
+.pin-button {
+    margin-top: 0.5em;
+    margin-bottom: 3em;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.go-button {
+    background: #D0EACE;
+    color: black;
+    border: none;
+}
+
+.room-create-input {
+    font-size: 1em;
+}
+
+.room-code-input {
     text-align: center;
     background: none;
     outline: none;
     border: none;
+    font-size: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 input::-webkit-inner-spin-button {

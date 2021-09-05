@@ -4,7 +4,7 @@ import '../css/FlexGrid.css'
 import {v4 as uuidv4} from "uuid";
 import Cookies from "js-cookie";
 import { RoomScreen } from './RoomScreen';
-import {PinScreen} from "./PinScreen";
+import {LoginScreen} from "./LoginScreen";
 import {DBGetRoom} from "../model/Server";
 import {Room} from "../model/Room";
 
@@ -41,7 +41,7 @@ function App() {
             {loggedIn && room !== null ?
                 <RoomScreen room={room}/>
                 :
-                <PinScreen onSelect={onSelect}/>
+                <LoginScreen onSelect={onSelect}/>
             }
         </UUIDContext.Provider>
     );

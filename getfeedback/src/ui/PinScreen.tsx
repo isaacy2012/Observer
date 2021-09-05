@@ -1,47 +1,36 @@
-import React, {useEffect, useRef, useState} from "react";
-import {UUIDContext} from "./App";
 import {Button} from "react-bootstrap";
-import '../css/PinScreen.css';
-import '../css/Header.css'
+import React, {useRef} from "react";
 
-export function PinScreen(props: { onSelect: (pin: number) => void }) {
+import '../css/PinScreen.css';
+
+
+export function PinScreen(props: {onSelect: (num: number) => void, onNewRoom: () => void}) {
     const pinInput = useRef<HTMLInputElement>(null);
-    let uuid = React.useContext(UUIDContext);
 
     return (
-        <div className="pin-container">
-            <div className="header-no-color">
-                <div className="row">
-                    <div className="column leftColumn">
-                        {<p>Observe</p>}
-                    </div>
-                </div>
-            </div>
-
-            <div className="pin-selector">
-                <div className="pin-selector-inner">
-                    <h2>Enter your room code below:</h2>
-                    <input
-                        type="tel" ref={pinInput} placeholder="0123456789" maxLength={10}/>
-                    <div>
-                        <Button onClick={() => {
-                            if (pinInput.current != null) {
-                                let num = parseInt(pinInput.current.value);
-                                if (!isNaN(num)) {
-                                    props.onSelect(num);
+        <div className="login-selector">
+            <div className="login-selector-inner">
+                <h2>Enter your room code below:</h2>
+                <input ref={pinInput} className="room-code-input" placeholder="0123456789" maxLength={10}/>
+                <div>
+                    <Button variant="success" className="pin-button go-button"
+                            onClick={() => {
+                                if (pinInput.current != null) {
+                                    let num = parseInt(pinInput.current.value);
+                                    if (!isNaN(num)) {
+                                        props.onSelect(num);
+                                    }
                                 }
-                            }
-                        }}>
-                            Go to Room
-                        </Button>
-                    </div>
-                    <div>
-                        <Button onClick={() => {
-                            props.onSelect(3)
-                        }}>
-                            New Room
-                        </Button>
-                    </div>
+                            }}>
+                        ENTER
+                    </Button>
+                </div>
+                <p className="new-room-text">Or, start a new room</p>
+                <div>
+                    <Button className="pin-button" variant="outline-secondary"
+                            onClick={props.onNewRoom}>
+                        NEW ROOM
+                    </Button>
                 </div>
             </div>
         </div>

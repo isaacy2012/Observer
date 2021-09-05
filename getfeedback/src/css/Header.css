@@ -7,14 +7,6 @@
     z-index: 100;
 }
 
-.header-no-color {
-    padding: 2em;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    z-index: 100;
-}
-
 
 .column {
     float: left;
