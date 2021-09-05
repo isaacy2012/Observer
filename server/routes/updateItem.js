@@ -7,7 +7,7 @@ router.post('/', function (req, res) {
     const { text, likes, id } = req.body;
     Item.findByIdAndUpdate(id, { text: text, likes: likes }, { new: true })
         .then(item => res.send(item))
-        .catch(item => res.send(item));
+        .catch(() => res.end());
 });
 
 module.exports = router;
