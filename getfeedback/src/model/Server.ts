@@ -10,11 +10,11 @@ export async function DBgetAll(roomId: string): Promise<Map<string, Item>> {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({id: roomId})
+        body: JSON.stringify({ id: roomId })
     });
     await response.json().then(data => {
         for (let i = 0; i < data.length; i++) {
-            const {text, _id, likes, room} = data[i];
+            const { text, _id, likes, room } = data[i];
             items.set(_id, new Item(room, text, _id, likes))
         }
     });
@@ -28,7 +28,7 @@ export async function DBAddItem(roomId: string, text: string): Promise<Item> {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({roomId, text})
+        body: JSON.stringify({ roomId, text })
     });
     let id = "";
     await response.json().then(response => id = response._id);
@@ -54,11 +54,11 @@ export async function DBAddRoom(name: string, creator: string): Promise<Room> {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name, creator})
+        body: JSON.stringify({ name, creator })
     });
     return response.json()
         .then(data => {
-            const {name, pin, creator, _id} = data;
+            const { name, pin, creator, _id } = data;
             return new Room(name, pin, creator, _id);
         });
 
@@ -71,11 +71,11 @@ export async function DBGetRoom(pin: number): Promise<Room> {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({pin: pin})
+        body: JSON.stringify({ pin: pin })
     });
     return response.json()
         .then(data => {
-            const {name, pin, creator, _id} = data;
+            const { name, pin, creator, _id } = data;
             return new Room(name, pin, creator, _id);
         }).catch(() => {
             return Promise.reject();
