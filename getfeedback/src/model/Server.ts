@@ -3,19 +3,19 @@ import {Room} from "./Room";
 
 
 //Fetch all items from database by get requesting the server
-export async function DBgetAll(room: Room): Promise<Map<string, Item>> {
+export async function DBgetAll(id: string): Promise<Map<string, Item>> {
     const items: Map<string, Item> = new Map();
     const response = await fetch('http://localhost:9000/get-items',{
         method: 'POST',
             headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(room)
+        body: JSON.stringify({id})
     });
     await response.json().then(data => {
         for(let i = 0; i<data.length; i++) {
             const {text, _id, likes, room}=data[i];
-            items.set(_id, new Item(text, _id, likes, room))
+            items.set(_id, new Item(room, text, _id, likes))
         }
     });
     return items;
@@ -32,7 +32,7 @@ export async function DBAddItem(roomId: string, text: string): Promise<Item> {
     });
     let id = "";
     await response.json().then(response => id = response._id);
-    return new Item(roomId, text, id, []);
+    return new Item(roomId, text, id);
 }
 
 //Update an item in database by sending a post request and returning true if successful otherwise false
@@ -48,31 +48,35 @@ export async function DBUpdateItem(itemToAdd: Item): Promise<Item> {
 }
 
 //Get a room from DB
-export async function DBAddRoom(roomToAdd: Room): Promise<Room> {
+export async function DBAddRoom(name: string, creator: string): Promise<Room> {
     const response = await fetch('http://localhost:9000/add-room', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(roomToAdd)
+        body: JSON.stringify({name, creator})
     });
-    await response.json().then(response => roomToAdd.id = response._id);
-    return roomToAdd;
+    return response.json()
+        .then(data => {
+            const { name, pin, creator, _id} = data;
+            return new Room(name, pin, creator, _id);
+        });
+
 }
 
 //Update an item in database by sending a post request and returning true if successful otherwise false
 export async function DBGetRoom(pin: number): Promise<Room> {
-    const response = await fetch('http://localhost:9000/get-item', {
+    const response = await fetch('http://localhost:9000/get-room', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(pin)
+        body: JSON.stringify({pin: pin})
     });
     return response.json()
         .then(data => {
-            const {_id, name, pin, maker} = data;
-          return new Room(name, _id, pin, maker);
+            const { name, pin, creator, _id} = data;
+            return new Room(name, pin, creator, _id);
         });
 }
 

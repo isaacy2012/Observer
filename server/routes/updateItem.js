@@ -5,7 +5,7 @@ const Item = require('../models/item');
 // update an Item in db by Id
 router.post('/', function (req, res) {
     const { text, likes, id } = req.body;
-    Item.findByIdAndUpdate(id, { text: text, likes: likes }, { new: true })
+    Item.findByIdAndUpdate(id, {text: text, likes: likes }, { new: true })
         .then(item => res.send(item))
         .catch(() => res.end());
 });

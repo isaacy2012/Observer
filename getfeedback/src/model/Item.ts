@@ -4,7 +4,7 @@ export class Item {
     likes: string[];
     text: string;
 
-    constructor(roomId: string, text: string, id: string, likes: string[]) {
+    constructor(roomId: string, text: string, id: string, likes: string[] = []) {
         this.roomId = roomId;
         this.id = id;
         this.text = text;

@@ -10,7 +10,7 @@ const roomSchema = new mongoose.Schema({
         type: "Number",
         required: true
     },
-    maker: {
+    creator: {
         type: String,
         required: true
     }
