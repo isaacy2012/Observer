@@ -7,8 +7,7 @@ const itemSchema = new mongoose.Schema({
         required: true
     },
     likes: {
-        type: "Number",
-        required: true
+        type: [String]
     }
 });
 
