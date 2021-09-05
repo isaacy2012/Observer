@@ -16,11 +16,9 @@ function makeOrGetUUID(): string {
     let uuid_null = Cookies.get(str_uuid);
     if (uuid_null === null || uuid_null === undefined) {
         let new_uuid = uuidv4();
-        console.log("notnull? " + new_uuid);
         Cookies.set(str_uuid, new_uuid);
         return new_uuid;
     }
-    console.log("wasnull? " + uuid_null);
     return uuid_null;
 }
 
@@ -29,10 +27,12 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [room, setRoom] = useState<Room | null>(null);
 
-    function onSelect(pin: number) {
+    function onSelect(pin: number, fail: () => void) {
         DBGetRoom(pin).then((newRoom) => {
             setRoom(newRoom);
             setLoggedIn(true);
+        }).catch(() => {
+            fail();
         })
     }
 

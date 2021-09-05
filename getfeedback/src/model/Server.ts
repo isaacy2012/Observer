@@ -3,18 +3,18 @@ import {Room} from "./Room";
 
 
 //Fetch all items from database by get requesting the server
-export async function DBgetAll(id: string): Promise<Map<string, Item>> {
+export async function DBgetAll(roomId: string): Promise<Map<string, Item>> {
     const items: Map<string, Item> = new Map();
-    const response = await fetch('http://localhost:9000/get-items',{
+    const response = await fetch('http://localhost:9000/get-items', {
         method: 'POST',
-            headers: {
+        headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({id})
+        body: JSON.stringify({id: roomId})
     });
     await response.json().then(data => {
-        for(let i = 0; i<data.length; i++) {
-            const {text, _id, likes, room}=data[i];
+        for (let i = 0; i < data.length; i++) {
+            const {text, _id, likes, room} = data[i];
             items.set(_id, new Item(room, text, _id, likes))
         }
     });
@@ -58,7 +58,7 @@ export async function DBAddRoom(name: string, creator: string): Promise<Room> {
     });
     return response.json()
         .then(data => {
-            const { name, pin, creator, _id} = data;
+            const {name, pin, creator, _id} = data;
             return new Room(name, pin, creator, _id);
         });
 
@@ -75,8 +75,10 @@ export async function DBGetRoom(pin: number): Promise<Room> {
     });
     return response.json()
         .then(data => {
-            const { name, pin, creator, _id} = data;
+            const {name, pin, creator, _id} = data;
             return new Room(name, pin, creator, _id);
+        }).catch(() => {
+            return Promise.reject();
         });
 }
 

@@ -17,13 +17,22 @@ export function RoomScreen(props: {room: Room}) {
     let uuid = React.useContext(UUIDContext);
 
     if (shouldUpdate) {
-        fetchFromDB();
         setShouldUpdate(false);
+        fetchFromDB();
     }
 
     function fetchFromDB() {
         DBgetAll(room.id).then((retItems) => {
             setItems(retItems);
+
+            // get the return items and find the max likes
+            let values = Array.from(retItems.values());
+            values.sort((a, b) => {
+                return a.getNLikes() - b.getNLikes();
+            })
+            if (values.length > 0) {
+                setMaxLikes(values[0].getNLikes());
+            }
         });
     }
 

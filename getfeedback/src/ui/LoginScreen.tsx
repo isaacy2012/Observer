@@ -6,8 +6,9 @@ import '../css/LoginScreen.css';
 import '../css/Header.css'
 import { NewRoom } from "./NewRoom";
 import {PinScreen} from "./PinScreen";
+import {DBAddRoom} from "../model/Server";
 
-export function LoginScreen(props: { onSelect: (pin: number) => void }) {
+export function LoginScreen(props: { onSelect: (pin: number, fail: () => void) => void}) {
     const second = useRef<HTMLDivElement>(null);
 
     return (
@@ -28,8 +29,9 @@ export function LoginScreen(props: { onSelect: (pin: number) => void }) {
             </div>
             <div ref={second} className="login-container">
                 <NewRoom onSelect={(name: string, creator: string) => {
-                    console.log("name: " + name)
-                    console.log("creator: " + creator)
+                    DBAddRoom(name, creator).then((newRoom) => {
+                        props.onSelect(newRoom.pin, () => {});
+                    });
                 }}/>
             </div>
         </div>
