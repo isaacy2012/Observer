@@ -22,7 +22,7 @@ export function RoomScreen(props: {room: Room}) {
     }
 
     function fetchFromDB() {
-        DBgetAll(room).then((retItems) => {
+        DBgetAll(room.id).then((retItems) => {
             setItems(retItems);
         });
     }
