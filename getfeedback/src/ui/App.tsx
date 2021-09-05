@@ -7,6 +7,24 @@ import {FlexGrid} from './FlexGrid';
 import {AddButton} from './AddButton';
 import {InputModal} from './InputModal';
 import {DBAddItem, DBgetAll, DBUpdateItem} from "../model/Server";
+import {v4 as uuidv4} from "uuid";
+import Cookies from "js-cookie";
+
+
+export const UUIDContext = React.createContext(makeOrGetUUID())
+
+function makeOrGetUUID(): string {
+    let str_uuid = "uuid";
+    let uuid_null = Cookies.get(str_uuid);
+    if (uuid_null === null || uuid_null === undefined) {
+        let new_uuid = uuidv4();
+        console.log("notnull? " + new_uuid);
+        Cookies.set(str_uuid, new_uuid);
+        return new_uuid;
+    }
+    console.log("wasnull? " + uuid_null);
+    return uuid_null;
+}
 
 
 function App() {
@@ -16,6 +34,8 @@ function App() {
     const [showModal, setShowModal] = useState(false);
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [maxLikes, setMaxLikes] = useState(0);
+    let uuid = React.useContext(UUIDContext);
+
 
     if (shouldUpdate) {
         fetchFromDB();
@@ -58,21 +78,38 @@ function App() {
         if (item == null) {
             return;
         }
-        item.like();
-        items.set(id, item);
+        item.like(uuid);
+        // items.set(id, item);
         console.log(item);
-        DBUpdateItem(item).then((newItem) => {
+        DBUpdateItem(item).then((_) => {
+            setShouldUpdate(true);
+        })
+    }
+
+    function unlikeItem(id: string) {
+        let item = items.get(id);
+        if (item == null) {
+            return;
+        }
+        item.unlike(uuid);
+        // items.set(id, item);
+        console.log(item);
+        DBUpdateItem(item).then((_) => {
             setShouldUpdate(true);
         })
     }
 
     return (
-        <div className="App">
-            <Header logo={<p>Observe</p>} title={title} originalPosterName={originalPosterName}/>
-            <AddButton onClick={onClick}/>
-            <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values())} onClick={likeItem}/>
-            <InputModal show={showModal} onClickPositive={addItem} handleClose={closeModal}/>
-        </div>
+        <UUIDContext.Provider value={makeOrGetUUID()}>
+            <div className="App">
+                <Header logo={<p>Observe</p>} title={title}
+                        originalPosterName={originalPosterName}/>
+                <AddButton onClick={onClick}/>
+                <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values())}
+                          onClick={likeItem} onUnlike={unlikeItem}/>
+                <InputModal show={showModal} onClickPositive={addItem} handleClose={closeModal}/>
+            </div>
+        </UUIDContext.Provider>
     );
 }
 
