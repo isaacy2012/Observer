@@ -16,8 +16,8 @@ const mongoose = require('mongoose');
 const app = express();
 
 //Connecting to MongoDB
-const user = ''; // put db username here
-const password = ''; // put db password here
+const user = 'dbUser'; // put db username here
+const password = 'mO6XYe70n1Htw08A'; // put db password here
 const uri = `mongodb+srv://${user}:${password}@cluster0.n3bdm.mongodb.net/Observer?retryWrites=true&w=majority`;
 mongoose.connect(uri).then(() => console.log("Connected to db"));
 
