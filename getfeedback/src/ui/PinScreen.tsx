@@ -1,6 +1,7 @@
 import {Button} from "react-bootstrap";
 import React, {useRef, useState} from "react";
 import '../css/PinScreen.css';
+import {useHistory} from "react-router-dom";
 
 
 export function PinScreen(props: { onSelect: (num: number, fail: () => void) => void, onNewRoom: () => void }) {
@@ -9,7 +10,7 @@ export function PinScreen(props: { onSelect: (num: number, fail: () => void) => 
 
     function shakeButton() {
         setShake(true);
-        setTimeout(() => setShake(false), 500);
+        setTimeout(() => setShake(false), 600);
     }
 
     return (

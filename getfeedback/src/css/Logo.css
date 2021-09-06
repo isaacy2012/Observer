@@ -1,0 +1,14 @@
+.clickable {
+    display: flex;
+    float: left;
+    cursor: pointer;
+}
+
+.logo {
+    width: 20px;
+    height: 20px;
+}
+
+.logo-text {
+    font-family: 'Work Sans', sans-serif;
+}

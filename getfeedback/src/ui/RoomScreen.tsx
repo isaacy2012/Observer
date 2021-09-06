@@ -7,6 +7,8 @@ import {FlexGrid} from "./FlexGrid";
 import {InputModal} from "./InputModal";
 import {UUIDContext} from "./App";
 import {Room} from "../model/Room";
+import {useHistory} from "react-router-dom";
+import Logo from "./Logo";
 
 export function RoomScreen(props: {room: Room}) {
     const {room} = props;
@@ -89,7 +91,7 @@ export function RoomScreen(props: {room: Room}) {
 
     return (
     <div className="App">
-        <Header logo={<p>Observer</p>} title={room.name}
+        <Header logo={<Logo/>} title={room.name}
                 originalPosterName={room.creator}/>
         <AddButton onClick={onClick}/>
         <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values())}
