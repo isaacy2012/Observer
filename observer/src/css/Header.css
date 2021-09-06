@@ -13,8 +13,14 @@
     width: 33.33%;
 }
 
-.leftColumn {
+.pin-text {
     text-align: left;
+}
+
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .middleColumn {
