@@ -1,0 +1,11 @@
+.hidden {
+    display:none;
+}
+
+.download-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: min-content;
+    font-family: 'Work Sans', sans-serif;
+}

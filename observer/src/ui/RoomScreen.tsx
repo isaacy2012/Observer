@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Item} from "../model/Item";
 import {DBAddItem, DBgetAll, DBUpdateItem} from "../model/Server";
 import {Header} from "./Header";
@@ -8,6 +8,8 @@ import {InputModal} from "./InputModal";
 import {UUIDContext} from "./App";
 import {Room} from "../model/Room";
 import Logo from "./Logo";
+import "../css/RoomScreen.css";
+import {Button} from "react-bootstrap";
 
 export function RoomScreen(props: {room: Room}) {
     const {room} = props;
@@ -15,6 +17,8 @@ export function RoomScreen(props: {room: Room}) {
     const [showModal, setShowModal] = useState(false);
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [maxLikes, setMaxLikes] = useState(0);
+    const [fileDownloadUrl, setFileDownloadUrl] = useState<string>("");
+    const dofileDownload = useRef<HTMLAnchorElement>(null);
     let uuid = React.useContext(UUIDContext);
 
     if (shouldUpdate) {
@@ -88,11 +92,32 @@ export function RoomScreen(props: {room: Room}) {
         })
     }
 
+    function download() {
+        const output = JSON.stringify(Array.from(items.values()).map(item => {
+            return {text: item.text, likes: item.getNLikes()}
+        }));
+        const blob = new Blob([output]);
+        const fileDownloadUrl = URL.createObjectURL(blob);
+        setFileDownloadUrl(fileDownloadUrl);
+    }
+
+    useEffect(() => {
+        if (dofileDownload.current !== null && fileDownloadUrl !== "") {
+            dofileDownload.current.click();
+            URL.revokeObjectURL(fileDownloadUrl);  // free up storage--no longer needed.
+        }
+        setFileDownloadUrl("");
+    }, [fileDownloadUrl])
+
     return (
     <div className="App">
         <Header logo={<Logo/>} title={room.name}
                 originalPosterName={room.creator}/>
         <AddButton onClick={onClick}/>
+        <Button className="download-button" onClick={download} variant="outline-secondary">
+            EXPORT
+        </Button>
+        <a className="hidden" download="Observer_export.txt" href={fileDownloadUrl} ref={dofileDownload}>Downloader</a>
         <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values())}
                   onClick={likeItem} onUnlike={unlikeItem}/>
         <InputModal show={showModal} onClickPositive={addItem} handleClose={closeModal}/>
