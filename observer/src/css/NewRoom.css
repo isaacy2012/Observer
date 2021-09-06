@@ -10,8 +10,8 @@ h2 {
     margin-bottom: 0.5em;
 }
 
-h3 {
-    margin-bottom: 2.5em;
+.h3-separate {
+    margin-bottom: 2.5em !important;
 }
 
 .pin-button {

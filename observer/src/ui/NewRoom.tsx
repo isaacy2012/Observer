@@ -1,6 +1,4 @@
-import '../css/App.css'
 import '../css/NewRoom.css';
-import '../css/Header.css'
 import {Button} from "react-bootstrap";
 import React, {useRef} from "react";
 
@@ -14,7 +12,7 @@ export function NewRoom(props: { onSelect: (name: string, creator: string) => vo
             <div className="login-selector-inner">
                 <div className="container">
                     <h2>Welcome to <input ref={roomNameInput} placeholder="Room Name"/></h2>
-                    <h3>Created by <input ref={creatorNameInput} placeholder="Your Name"/></h3>
+                    <h3 className="h3-separate">Created by <input ref={creatorNameInput} placeholder="Your Name"/></h3>
                 </div>
                 <Button variant="success" className="pin-button go-button"
                         onClick={() => {
