@@ -1,6 +1,6 @@
 import {Item} from "./Item";
 import {Room} from "./Room";
-const ip: string = "13.211.253.111";
+const ip: string = "54.206.97.213";
 
 //Fetch all items from database by get requesting the server
 export async function DBgetAll(roomId: string): Promise<Map<string, Item>> {

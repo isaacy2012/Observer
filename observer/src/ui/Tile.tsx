@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Item} from "../model/Item";
 import {Card} from 'react-bootstrap';
 import {StyleSheet, css} from "aphrodite";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faHeart, faHeartBroken} from "@fortawesome/free-solid-svg-icons";
 import "../css/App.css"
 import "../css/LikeModule.css"
 import {LikeModule} from "./LikeModule";
@@ -27,7 +25,7 @@ function hslToHex(h: number, s: number, l: number) {
 
 function getHexColorFromLikes(hue: number, maxLikes: number, thisLikes: number): string {
     let calcMaxLikes = maxLikes >= 10 ? maxLikes : 10;
-    if (thisLikes == 0) {
+    if (thisLikes === 0) {
         return (hslToHex(hue, 0, 95));
     } else if (thisLikes <= calcMaxLikes) {
         return (hslToHex(hue, thisLikes / calcMaxLikes * 53, 95 - 18 * (thisLikes / calcMaxLikes)));

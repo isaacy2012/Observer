@@ -1,7 +1,6 @@
 import {Button} from "react-bootstrap";
 import React, {useRef, useState} from "react";
 import '../css/PinScreen.css';
-import {useHistory} from "react-router-dom";
 
 
 export function PinScreen(props: { onSelect: (num: number, fail: () => void) => void, onNewRoom: () => void }) {

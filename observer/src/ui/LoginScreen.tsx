@@ -1,13 +1,10 @@
-import React, {useEffect, useRef, useState} from "react";
-import {UUIDContext} from "./App";
-import {Button} from "react-bootstrap";
+import React, {useRef} from "react";
 import '../css/App.css'
 import '../css/LoginScreen.css';
 import '../css/Header.css'
 import { NewRoom } from "./NewRoom";
 import {PinScreen} from "./PinScreen";
 import {DBAddRoom} from "../model/Server";
-import {useHistory} from "react-router-dom";
 import Logo from "./Logo";
 
 export function LoginScreen(props: { onSelect: (pin: number, fail: () => void) => void}) {

@@ -7,7 +7,6 @@ import {FlexGrid} from "./FlexGrid";
 import {InputModal} from "./InputModal";
 import {UUIDContext} from "./App";
 import {Room} from "../model/Room";
-import {useHistory} from "react-router-dom";
 import Logo from "./Logo";
 
 export function RoomScreen(props: {room: Room}) {

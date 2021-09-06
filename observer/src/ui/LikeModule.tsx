@@ -1,7 +1,4 @@
-import {Item} from "../model/Item";
-import React, {useState} from "react";
-import {Card} from "react-bootstrap";
-import {css} from "aphrodite";
+import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHeart, faHeartBroken} from "@fortawesome/free-solid-svg-icons";
 
