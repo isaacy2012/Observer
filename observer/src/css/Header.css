@@ -14,7 +14,7 @@
 }
 
 .leftColumn {
-    text-align: left
+    text-align: left;
 }
 
 .middleColumn {
@@ -36,13 +36,13 @@
 }
 
 h1 {
-    font-size: max(20px, 2.5vw);
+    font-size: clamp(25px, 2.9vw, 50px);
     margin-top: 0;
     margin-bottom: 0;
 }
 
 h3 {
-    font-size: max(13px, 1vw);
+    font-size: max(13px, 1em);
     margin-bottom: 0;
 }
 

@@ -4,6 +4,7 @@
     display: flex;
     margin-left: max(25px, calc(12.5vw - 100px)); /* gutter size offset */
     margin-right: max(25px, calc(12.5vw - 100px));
+    margin-bottom: max(25px, calc(12.5vw - 100px));
     width: auto;
 }
 .grid-column {

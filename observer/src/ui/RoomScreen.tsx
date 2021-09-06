@@ -111,14 +111,14 @@ export function RoomScreen(props: {room: Room}) {
 
     return (
     <div className="App">
-        <Header logo={<Logo/>} title={room.name}
+        <Header logo={<Logo/>} roomPin={room.pin} title={room.name}
                 originalPosterName={room.creator}/>
         <AddButton onClick={onClick}/>
-        <Button className="download-button" onClick={download} variant="outline-secondary">
+        <Button className="download-button" onClick={download} variant="secondary">
             EXPORT
         </Button>
         <a className="hidden" download="Observer_export.txt" href={fileDownloadUrl} ref={dofileDownload}>Downloader</a>
-        <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values())}
+        <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values()).reverse()}
                   onClick={likeItem} onUnlike={unlikeItem}/>
         <InputModal show={showModal} onClickPositive={addItem} handleClose={closeModal}/>
     </div>

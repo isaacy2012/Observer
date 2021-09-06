@@ -3,6 +3,9 @@
 }
 
 .download-button {
+    z-index: 1000;
+    background-color: #FFFEFB;
+    color: black;
     position: fixed;
     right: 20px;
     bottom: 20px;
