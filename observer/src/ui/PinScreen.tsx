@@ -27,7 +27,7 @@ export function PinScreen(props: { onSelect: (num: number, fail: () => void) => 
         <div className="login-selector">
             <div className="login-selector-inner">
                 <h2>Enter your room code below:</h2>
-                <input ref={pinInput} className="room-code-input" placeholder="0123456789"
+                <input ref={pinInput} className="room-code-input" placeholder="1234"
                        onKeyDown={(e) => {
                            if (e.key === "Enter") {
                                tryGoToRoom();
