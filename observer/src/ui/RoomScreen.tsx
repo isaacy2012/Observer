@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Item} from "../model/Item";
-import {DBAddItem, DBgetAll, DBUpdateItem} from "../model/Server";
+import {DBAddItem, DBGetAll, DBUpdateItem} from "../model/Server";
 import {Header} from "./Header";
 import {AddButton} from "./AddButton";
 import {FlexGrid} from "./FlexGrid";
@@ -27,7 +27,7 @@ export function RoomScreen(props: {room: Room}) {
     }
 
     function fetchFromDB() {
-        DBgetAll(room.id).then((retItems) => {
+        DBGetAll(room.id).then((retItems) => {
             setItems(retItems);
 
             // get the return items and find the max likes
