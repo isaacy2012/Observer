@@ -33,7 +33,7 @@ export function PinScreen(props: { onSelect: (num: number, fail: () => void) => 
                         ENTER
                     </Button>
                 </div>
-                <p className="new-room-text">Or, start a new room</p>
+                <p className="new-room-text">Use <b>'0'</b> to view the demo room, or start a new room</p>
                 <div>
                     <Button className="pin-button" variant="outline-secondary"
                             onClick={props.onNewRoom}>
