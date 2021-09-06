@@ -12,24 +12,31 @@ export function PinScreen(props: { onSelect: (num: number, fail: () => void) => 
         setTimeout(() => setShake(false), 600);
     }
 
+    function tryGoToRoom() {
+        if (pinInput.current != null) {
+            let num = parseInt(pinInput.current.value);
+            if (!isNaN(num)) {
+                props.onSelect(num, shakeButton);
+                return;
+            }
+        }
+        shakeButton();
+    }
+
     return (
         <div className="login-selector">
             <div className="login-selector-inner">
                 <h2>Enter your room code below:</h2>
                 <input ref={pinInput} className="room-code-input" placeholder="0123456789"
-                       maxLength={10}/>
+                       onKeyDown={(e) => {
+                           if (e.key === "Enter") {
+                               tryGoToRoom();
+                           }
+                       }
+                       } maxLength={10}/>
                 <div>
                     <Button variant="success" className={shake ? "pin-button go-button shake-button" : "pin-button go-button"}
-                            onClick={() => {
-                                if (pinInput.current != null) {
-                                    let num = parseInt(pinInput.current.value);
-                                    if (!isNaN(num)) {
-                                        props.onSelect(num, shakeButton);
-                                        return;
-                                    }
-                                }
-                                shakeButton();
-                            }}>
+                            onClick={tryGoToRoom}>
                         ENTER
                     </Button>
                 </div>

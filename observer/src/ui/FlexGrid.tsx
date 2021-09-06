@@ -7,9 +7,8 @@ import {Tile} from './Tile';
 
 const breakpointColumns = {
     default: 3,
-    1100: 3,
-    700: 2,
-    500: 1
+    1000: 2,
+    700: 1
 };
 
 export function FlexGrid(props: { maxLikes: number, messages: Item[], onClick: (index: string) => void, onUnlike: (index: string) => void }) {

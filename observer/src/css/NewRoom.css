@@ -26,6 +26,16 @@ h2 {
     border: none;
 }
 
+.cancel-button-div {
+    text-align: center;
+}
+
+.cancel-button {
+    padding: 20px;
+    margin-bottom: 2.5em;
+    cursor: pointer;
+}
+
 .container {
     text-align: right;
 }

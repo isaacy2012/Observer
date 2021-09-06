@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import '../css/App.css'
 import '../css/LoginScreen.css';
 import '../css/Header.css'
@@ -8,6 +8,7 @@ import {DBAddRoom} from "../model/Server";
 import Logo from "./Logo";
 
 export function LoginScreen(props: { onSelect: (pin: number, fail: () => void) => void}) {
+    const first = useRef<HTMLDivElement>(null);
     const second = useRef<HTMLDivElement>(null);
 
     return (
@@ -19,7 +20,7 @@ export function LoginScreen(props: { onSelect: (pin: number, fail: () => void) =
                     </div>
                 </div>
             </div>
-            <div className="login-container">
+            <div ref={first} className="login-container">
                 <PinScreen onSelect={props.onSelect} onNewRoom={() => {
                     if (second.current != null) {
                         second.current.scrollIntoView({behavior: "smooth"});
@@ -31,7 +32,12 @@ export function LoginScreen(props: { onSelect: (pin: number, fail: () => void) =
                     DBAddRoom(name, creator).then((newRoom) => {
                         props.onSelect(newRoom.pin, () => {});
                     });
-                }}/>
+                }} onCancel={() => {
+                    if (first.current != null) {
+                        first.current.scrollIntoView({behavior: "smooth"});
+                    }
+                }
+                }/>
             </div>
         </div>
     );
