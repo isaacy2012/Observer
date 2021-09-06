@@ -113,7 +113,12 @@ export function RoomScreen(props: {room: Room}) {
     <div className="App">
         <Header logo={<Logo/>} roomPin={room.pin} title={room.name}
                 originalPosterName={room.creator}/>
-        <AddButton onClick={onClick}/>
+
+        {room.pin !== 0 ?
+            <AddButton onClick={onClick}/>
+            :
+            <AddButton onClick={() => alert("Sorry, you can't post to the demo room.")}/>
+        }
         <Button className="download-button" onClick={download} variant="secondary">
             EXPORT
         </Button>
