@@ -1,11 +1,11 @@
 import {Item} from "./Item";
 import {Room} from "./Room";
-
+const ip: string = "13.211.253.111";
 
 //Fetch all items from database by get requesting the server
 export async function DBgetAll(roomId: string): Promise<Map<string, Item>> {
     const items: Map<string, Item> = new Map();
-    const response = await fetch('http://localhost:9000/get-items', {
+    const response = await fetch(`http://${ip}:9000/get-items`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -23,7 +23,7 @@ export async function DBgetAll(roomId: string): Promise<Map<string, Item>> {
 
 //Add an item to the database by sending a post request and returning the id of item added to db
 export async function DBAddItem(roomId: string, text: string): Promise<Item> {
-    const response = await fetch('http://localhost:9000/add-item', {
+    const response = await fetch(`http://${ip}:9000/add-item`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ export async function DBAddItem(roomId: string, text: string): Promise<Item> {
 
 //Update an item in database by sending a post request and returning true if successful otherwise false
 export async function DBUpdateItem(itemToAdd: Item): Promise<Item> {
-    await fetch('http://localhost:9000/update-item', {
+    await fetch(`http://${ip}:9000/update-item`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export async function DBUpdateItem(itemToAdd: Item): Promise<Item> {
 
 //Get a room from DB
 export async function DBAddRoom(name: string, creator: string): Promise<Room> {
-    const response = await fetch('http://localhost:9000/add-room', {
+    const response = await fetch(`http://${ip}:9000/add-room`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ export async function DBAddRoom(name: string, creator: string): Promise<Room> {
 
 //Update an item in database by sending a post request and returning true if successful otherwise false
 export async function DBGetRoom(pin: number): Promise<Room> {
-    const response = await fetch('http://localhost:9000/get-room', {
+    const response = await fetch(`http://${ip}:9000/get-room`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
