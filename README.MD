@@ -19,4 +19,10 @@ A color gradient from grey to green shows what feedback people agree with the mo
 - Write notes of feedback and add them to the page.
 - Like posted notes with liked notes become greener.
 - View all previously posted notes in an easy-to-read grid pattern.
+
+## Technology 
+- TypeScript/React for the front-end
+- [Figma](https://www.figma.com/file/ckgnSORLxTf31YEWymSS4a/Observer?node-id=0%3A1) for design prototyping
+- Amazon EC2 server
+- MongoDB database
     
