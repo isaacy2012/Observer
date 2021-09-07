@@ -1,8 +1,8 @@
 # Observe
 ### By Isaac Young and George Powell
 <p float="left">    
-    <img src="READMEImages/demo_room.gif" width="480" height="301"/>
-    <img src="READMEImages/new_room.gif"  width="480" height="301"/>
+    <img src="READMEImages/demo_room.gif" width="450" height="282"/>
+    <img src="READMEImages/new_room.gif"  width="450" height="282"/>
 </p>
 
 
