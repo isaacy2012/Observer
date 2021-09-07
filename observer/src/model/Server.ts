@@ -4,8 +4,10 @@ const ip: string = "room.powellnz.com";
 
 /**
  * Fetch all items from database by get requesting the server
+ * @param roomId the id of the room to get all items from
+ * @return items the items from the room
  */
-export async function DBgetAll(roomId: string): Promise<Map<string, Item>> {
+export async function DBGetAll(roomId: string): Promise<Map<string, Item>> {
     const items: Map<string, Item> = new Map();
     const response = await fetch(`https://${ip}:9000/get-items`, {
         method: 'POST',
@@ -24,7 +26,10 @@ export async function DBgetAll(roomId: string): Promise<Map<string, Item>> {
 }
 
 /**
- * Add an item to the database by sending a post request and returning the id of item added to db
+ * Add an item to the database
+ * @param roomId the id of the room in which the item is from
+ * @param text the text of the item
+ * @return item the newly created Item object
  */
 export async function DBAddItem(roomId: string, text: string): Promise<Item> {
     const response = await fetch(`https://${ip}:9000/add-item`, {
@@ -40,7 +45,9 @@ export async function DBAddItem(roomId: string, text: string): Promise<Item> {
 }
 
 /**
- * Update an item in database by sending a post request and returning true if successful otherwise false
+ * Update an item in the database
+ * @param itemToAdd the item being updated
+ * @return itemToAdd the item provided
  */
 export async function DBUpdateItem(itemToAdd: Item): Promise<Item> {
     await fetch(`https://${ip}:9000/update-item`, {
@@ -54,7 +61,10 @@ export async function DBUpdateItem(itemToAdd: Item): Promise<Item> {
 }
 
 /**
- * Get a room from DB
+ * add a room to the database
+ * @param name the name of the room
+ * @param creator the room's creator
+ * @return room the newly created room object
  */
 export async function DBAddRoom(name: string, creator: string): Promise<Room> {
     const response = await fetch(`https://${ip}:9000/add-room`, {
@@ -73,7 +83,9 @@ export async function DBAddRoom(name: string, creator: string): Promise<Room> {
 }
 
 /**
- * Update an item in database by sending a post request and returning true if successful otherwise false
+ * Gets a room from the database
+ * @param pin the pin number of the room to get
+ * @return the new room object if the room exists in the datbaase otherwise Promise.reject
  */
 export async function DBGetRoom(pin: number): Promise<Room> {
     const response = await fetch(`https://${ip}:9000/get-room`, {
