@@ -26,6 +26,9 @@ export function RoomScreen(props: {room: Room}) {
         fetchFromDB();
     }
 
+    /**
+     * Get the items from the databases
+     */
     function fetchFromDB() {
         DBgetAll(room.id).then((retItems) => {
             setItems(retItems);
@@ -42,18 +45,31 @@ export function RoomScreen(props: {room: Room}) {
     }
 
 
+    /**
+     * On mount, fetch from DB
+     */
     useEffect(() => {
         fetchFromDB()
     }, []);
 
-    function onClick() {
+    /**
+     * When "add item" is pressed
+     */
+    function onAddButton() {
         setShowModal(true);
     }
 
+    /**
+     * Closing the modal
+     */
     function closeModal() {
         setShowModal(false);
     }
 
+    /**
+     * Add an item to the database and ask to refresh
+     * @param name the name of the new item
+     */
     function addItem(name: string) {
         DBAddItem(room.id, name).then((newItem) => {
                 let newItems = items;
@@ -66,6 +82,10 @@ export function RoomScreen(props: {room: Room}) {
         })
     }
 
+    /**
+     * Like an item with a particular id
+     * @param id the id of the item to like
+     */
     function likeItem(id: string) {
         let item = items.get(id);
         if (item == null) {
@@ -79,6 +99,10 @@ export function RoomScreen(props: {room: Room}) {
         })
     }
 
+    /**
+     * Unlike an item with a particular id
+     * @param id the id of the item to like
+     */
     function unlikeItem(id: string) {
         let item = items.get(id);
         if (item == null) {
@@ -92,6 +116,9 @@ export function RoomScreen(props: {room: Room}) {
         })
     }
 
+    /**
+     * Download to JSON
+     */
     function download() {
         const output = JSON.stringify(Array.from(items.values()).map(item => {
             return {text: item.text, likes: item.getNLikes()}
@@ -101,6 +128,10 @@ export function RoomScreen(props: {room: Room}) {
         setFileDownloadUrl(fileDownloadUrl);
     }
 
+    /**
+     * Once the download URL is set, download immediately using the doFileDownload invisible
+     * button
+     */
     useEffect(() => {
         if (dofileDownload.current !== null && fileDownloadUrl !== "") {
             dofileDownload.current.click();
@@ -115,7 +146,7 @@ export function RoomScreen(props: {room: Room}) {
                 originalPosterName={room.creator}/>
 
         {room.pin !== 0 ?
-            <AddButton onClick={onClick}/>
+            <AddButton onClick={onAddButton}/>
             :
             <AddButton onClick={() => alert("Sorry, you can't post to the demo room.")}/>
         }
@@ -123,6 +154,7 @@ export function RoomScreen(props: {room: Room}) {
             EXPORT
         </Button>
         <a className="hidden" download="Observer_export.txt" href={fileDownloadUrl} ref={dofileDownload}>Downloader</a>
+        {/*Reverse the items into the FlexGrid*/}
         <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values()).reverse()}
                   onClick={likeItem} onUnlike={unlikeItem}/>
         <InputModal show={showModal} onClickPositive={addItem} handleClose={closeModal}/>

@@ -14,6 +14,9 @@ import {
     useLocation
 } from "react-router-dom";
 
+/**
+ * getQuery from location for id string
+ */
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
@@ -21,6 +24,9 @@ function useQuery() {
 
 export const UUIDContext = React.createContext(makeOrGetUUID())
 
+/**
+ * Make or generate UUID if there isn't one in the cookies
+ */
 function makeOrGetUUID(): string {
     let str_uuid = "uuid";
     let uuid_null = Cookies.get(str_uuid);
@@ -45,6 +51,11 @@ function App() {
     const [room, setRoom] = useState<Room | null>(null);
     const history = useHistory();
 
+    /**
+     * When a room pin is selected
+     * @param pin the pin number of the requested room
+     * @param fail the function to run on failure
+     */
     function onSelect(pin: number, fail: () => void) {
         DBGetRoom(pin).then((newRoom) => {
             // set query string
@@ -60,6 +71,9 @@ function App() {
         })
     }
 
+    /**
+     * If there is a query string, log in
+     */
     let queryString = useQuery().get("id");
     if (queryString && !loggedIn) {
         console.log("room: " + queryString)

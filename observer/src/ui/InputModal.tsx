@@ -9,11 +9,11 @@ export function InputModal(props: { show: boolean, onClickPositive: (name: strin
     const textAreaAutoSize = useRef<HTMLTextAreaElement>(null);
 
 
+    /**
+     * Automatically focus on the textArea
+     */
     useEffect(() => {
-        if (!show) {
-            return;
-        }
-        if (textAreaAutoSize.current !== null) {
+        if (show && textAreaAutoSize.current !== null) {
             return textAreaAutoSize.current.focus();
         }
     }, [show, textAreaAutoSize]);

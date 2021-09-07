@@ -8,6 +8,7 @@ import {LikeModule} from "./LikeModule";
 import {UUIDContext} from './App';
 
 /**
+ * Convert hsl to hex (adapted from https://stackoverflow.com/questions/36721830/convert-hsl-to-rgb-and-hex)
  * @param h hue
  * @param s saturation
  * @param l luma
@@ -23,6 +24,12 @@ function hslToHex(h: number, s: number, l: number) {
     return `#${f(0)}${f(8)}${f(4)}`;
 }
 
+/**
+ * Get the hex color from likes
+ * @param hue The hue
+ * @param maxLikes The maximum number of likes of any item in this room
+ * @param thisLikes The number of likes of this item
+ */
 function getHexColorFromLikes(hue: number, maxLikes: number, thisLikes: number): string {
     let calcMaxLikes = maxLikes >= 10 ? maxLikes : 10;
     if (thisLikes === 0) {
@@ -34,10 +41,15 @@ function getHexColorFromLikes(hue: number, maxLikes: number, thisLikes: number):
     }
 }
 
-const styles = (maxLikes: number, likes: number) => {
+/**
+ * Create the style for the card
+ * @param maxLikes The maximum number of likes of any item in this room
+ * @param thisLikes The number of likes of this item
+ */
+const styles = (maxLikes: number, thisLikes: number) => {
     return StyleSheet.create({
         card: {
-            backgroundColor: getHexColorFromLikes(115, maxLikes, likes),
+            backgroundColor: getHexColorFromLikes(115, maxLikes, thisLikes),
             textAlign: "left",
             borderRadius: "10px",
             marginTop: "30px",

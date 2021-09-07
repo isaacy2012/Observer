@@ -22,6 +22,7 @@ export function LoginScreen(props: { onSelect: (pin: number, fail: () => void) =
             </div>
             <div ref={first} className="login-container">
                 <PinScreen onSelect={props.onSelect} onNewRoom={() => {
+                    // Scroll to new room screen
                     if (second.current != null) {
                         second.current.scrollIntoView({behavior: "smooth"});
                     }
@@ -33,6 +34,7 @@ export function LoginScreen(props: { onSelect: (pin: number, fail: () => void) =
                         props.onSelect(newRoom.pin, () => {});
                     });
                 }} onCancel={() => {
+                    // Scroll back to first screen
                     if (first.current != null) {
                         first.current.scrollIntoView({behavior: "smooth"});
                     }
