@@ -1,10 +1,19 @@
 # Observe
 ### By Isaac Young and George Powell
-We noticed from our courses at university that there wasn't an easy way to provide anonymous feedback when feedback was needed and a way indicate which areas of feedback people felt strongly about. 
-We concluded that this was a problem that we could fix, so we made Observe.
+<p float="left">    
+    <img src="READMEImages/demo_room.gif" width="480" height="301"/>
+    <img src="READMEImages/new_room.gif"  width="480" height="301"/>
+</p>
 
-<img src="READMEImages/demo_room.gif" width="351" height="560"/>
-<img src="READMEImages/new_room.gif"  width="351" height="560"/>
+
+## Observe helps you collect and visualise feedback
+We noticed from our courses at university that there wasn't an easy way to provide anonymous feedback when feedback was needed and a way indicate which areas of feedback people felt strongly about, and so we decided to make Observe. 
+
+## Create your own rooms to poll for feedback
+People can join your room via a link or by entering the pin code of the room. 
+
+## Visualise feedback
+A color gradient from grey to green shows what feedback people agree with the most. 
 
 ## Features
 - Write notes of feedback and add them to the page.
