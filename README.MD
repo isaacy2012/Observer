@@ -23,6 +23,6 @@ A color gradient from grey to green shows what feedback people agree with the mo
 ## Technology 
 - React + TypeScript for the frontend
 - [Figma](https://www.figma.com/file/ckgnSORLxTf31YEWymSS4a/Observer?node-id=0%3A1) for design prototyping
-- Amazon EC2 server
-- MongoDB database
+- Amazon EC2 instance running Node.js for the backend
+- MongoDB database 
     
