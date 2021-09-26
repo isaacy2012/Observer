@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import '../css/App.css';
 import '../css/FlexGrid.css'
 import {v4 as uuidv4} from "uuid";
@@ -9,7 +9,6 @@ import {DBGetRoom} from "../model/Server";
 import {Room} from "../model/Room";
 import {
     BrowserRouter as Router,
-    Link,
     useHistory,
     useLocation
 } from "react-router-dom";
@@ -56,7 +55,7 @@ function App() {
      * @param pin the pin number of the requested room
      * @param fail the function to run on failure
      */
-    function onSelect(pin: number, fail: () => void) {
+    let onSelect = useCallback(function(pin: number, fail: () => void) {
         DBGetRoom(pin).then((newRoom) => {
             // set query string
             let params = new URLSearchParams();
@@ -69,21 +68,23 @@ function App() {
         }).catch(() => {
             fail();
         })
-    }
+    }, [history]);
 
     /**
      * If there is a query string, log in
      */
     let queryString = useQuery().get("id");
-    if (queryString && !loggedIn) {
-        console.log("room: " + queryString)
-        onSelect(parseInt(queryString), () => {
-            // set query string
-            let params = new URLSearchParams();
-            history.push({search: params.toString()});
-            window.location.reload();
-        })
-    }
+    useEffect(() => {
+        if (queryString && !loggedIn) {
+            // console.log("room: " + queryString)
+            onSelect(parseInt(queryString), () => {
+                // set query string
+                let params = new URLSearchParams();
+                history.push({search: params.toString()});
+                window.location.reload();
+            })
+        }
+    }, [loggedIn, queryString, history, onSelect]);
 
     return (
         <UUIDContext.Provider value={makeOrGetUUID()}>
