@@ -11,7 +11,7 @@ import Logo from "./Logo";
 import "../css/RoomScreen.css";
 import {Button} from "react-bootstrap";
 
-export function RoomScreen(props: {room: Room}) {
+export function RoomScreen(props: { room: Room }) {
     const {room} = props;
     const [items, setItems] = useState<Map<string, Item>>(new Map());
     const [showModal, setShowModal] = useState(false);
@@ -35,11 +35,14 @@ export function RoomScreen(props: {room: Room}) {
 
             // get the return items and find the max likes
             let values = Array.from(retItems.values());
-            values.sort((a, b) => {
-                return a.getNLikes() - b.getNLikes();
-            })
             if (values.length > 0) {
-                setMaxLikes(values[0].getNLikes());
+                setMaxLikes(
+                    values
+                        .map(x => x.getNLikes())
+                        .reduce((a, b) => {
+                            return Math.max(a, b);
+                        }, 0)
+                );
             }
         });
     }
@@ -141,23 +144,24 @@ export function RoomScreen(props: {room: Room}) {
     }, [fileDownloadUrl])
 
     return (
-    <div className="App">
-        <Header logo={<Logo/>} roomPin={room.pin} title={room.name}
-                originalPosterName={room.creator}/>
+        <div className="App">
+            <Header logo={<Logo/>} roomPin={room.pin} title={room.name}
+                    originalPosterName={room.creator}/>
 
-        {room.pin !== 0 ?
-            <AddButton onClick={onAddButton}/>
-            :
-            <AddButton onClick={() => alert("Sorry, you can't post to the demo room.")}/>
-        }
-        <Button className="download-button" onClick={download} variant="secondary">
-            EXPORT
-        </Button>
-        <a className="hidden" download="Observer_export.txt" href={fileDownloadUrl} ref={dofileDownload}>Downloader</a>
-        {/*Reverse the items into the FlexGrid*/}
-        <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values()).reverse()}
-                  onClick={likeItem} onUnlike={unlikeItem}/>
-        <InputModal show={showModal} onClickPositive={addItem} handleClose={closeModal}/>
-    </div>
+            {room.pin !== 0 ?
+                <AddButton onClick={onAddButton}/>
+                :
+                <AddButton onClick={() => alert("Sorry, you can't post to the demo room.")}/>
+            }
+            <Button className="download-button" onClick={download} variant="secondary">
+                EXPORT
+            </Button>
+            <a className="hidden" download="Observer_export.txt" href={fileDownloadUrl}
+               ref={dofileDownload}>Downloader</a>
+            {/*Reverse the items into the FlexGrid*/}
+            <FlexGrid maxLikes={maxLikes} messages={Array.from(items.values()).reverse()}
+                      onClick={likeItem} onUnlike={unlikeItem}/>
+            <InputModal show={showModal} onClickPositive={addItem} handleClose={closeModal}/>
+        </div>
     );
 }
