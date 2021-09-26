@@ -53,6 +53,13 @@ export function RoomScreen(props: { room: Room }) {
      */
     useEffect(() => {
         fetchFromDB()
+        // Refresh every 5000 seconds
+        let interval = setInterval(() => {
+            fetchFromDB();
+            // console.log("REFRESHED")
+        }, 5000)
+        // Cleanup refresh
+        return () => {clearInterval(interval)}
     }, []);
 
     /**
