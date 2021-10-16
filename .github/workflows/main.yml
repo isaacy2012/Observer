@@ -10,7 +10,7 @@ jobs:
   deploy:
     defaults:
         run:
-          working-directory: dart_project
+          working-directory: observer
     runs-on: ubuntu-latest
     strategy:
       matrix:
