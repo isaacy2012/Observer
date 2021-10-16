@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import '../css/Logo.css'
 import logo from "../img/logo.svg"
 
-export default function() {
+export default function Logo() {
     const history = useHistory();
 
     return (

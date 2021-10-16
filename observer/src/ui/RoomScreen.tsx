@@ -60,7 +60,7 @@ export function RoomScreen(props: { room: Room }) {
         }, 5000)
         // Cleanup refresh
         return () => {clearInterval(interval)}
-    }, []);
+    }, [fetchFromDB]);
 
     /**
      * When "add item" is pressed

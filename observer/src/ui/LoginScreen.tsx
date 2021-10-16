@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useRef} from "react";
 import '../css/App.css'
 import '../css/LoginScreen.css';
 import '../css/Header.css'
