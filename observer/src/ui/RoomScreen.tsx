@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {Item} from "../model/Item";
 import {DBAddItem, DBGetAll, DBUpdateItem} from "../model/Server";
 import {Header} from "./Header";
@@ -21,38 +21,40 @@ export function RoomScreen(props: { room: Room }) {
     const dofileDownload = useRef<HTMLAnchorElement>(null);
     let uuid = React.useContext(UUIDContext);
 
+    /**
+     * Get the items from the databases
+     */
+    const fetchFromDB = useCallback(
+        () => {
+            DBGetAll(room.id).then((retItems) => {
+                setItems(retItems);
+
+                // get the return items and find the max likes
+                let values = Array.from(retItems.values());
+                if (values.length > 0) {
+                    setMaxLikes(
+                        values
+                            .map(x => x.getNLikes())
+                            .reduce((a, b) => {
+                                return Math.max(a, b);
+                            }, 0)
+                    );
+                }
+            });
+        },
+        [room.id],
+    );
+
     if (shouldUpdate) {
         setShouldUpdate(false);
         fetchFromDB();
     }
 
     /**
-     * Get the items from the databases
-     */
-    function fetchFromDB() {
-        DBGetAll(room.id).then((retItems) => {
-            setItems(retItems);
-
-            // get the return items and find the max likes
-            let values = Array.from(retItems.values());
-            if (values.length > 0) {
-                setMaxLikes(
-                    values
-                        .map(x => x.getNLikes())
-                        .reduce((a, b) => {
-                            return Math.max(a, b);
-                        }, 0)
-                );
-            }
-        });
-    }
-
-
-    /**
      * On mount, fetch from DB
      */
     useEffect(() => {
-        fetchFromDB()
+        fetchFromDB();
         // Refresh every 5000 seconds
         let interval = setInterval(() => {
             fetchFromDB();
