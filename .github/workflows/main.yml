@@ -21,7 +21,7 @@ jobs:
     - name: Cache dependencies
       uses: actions/cache@v2
       with:
-        path: ~/.npm
+        path: ~/observer/.npm
         key: npm-${{ hashFiles('package-lock.json') }}
         restore-keys: npm-
           
