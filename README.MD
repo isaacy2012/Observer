@@ -7,7 +7,7 @@
 
 
 ## Observe helps you collect and visualise feedback
-We noticed from our courses at university that there wasn't an easy way to provide anonymous feedback when feedback was needed and a way indicate which areas of feedback people felt strongly about, and so we decided to make Observe. 
+We noticed from our courses at university that there wasn't an easy way to provide anonymous feedback when feedback was needed and indicate which areas of feedback people felt strongly about, and so we decided to make Observe. 
 
 ## Create your own rooms to poll for feedback
 People can join your room via a link or by entering the pin code of the room. 
