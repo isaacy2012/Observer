@@ -7,6 +7,40 @@
     z-index: 100;
 }
 
+@media (max-width: 600px) {
+    .header {
+        position: static;
+    }
+
+    /* Clear floats after the columns */
+    .row {
+        flex-direction: column;
+    }
+
+
+    .column {
+        width: 100% !important;
+    }
+
+    .leftColumn {
+        justify-content: space-between !important;
+        flex-direction: row !important;
+        width: 100% !important;
+    }
+
+    h1 {
+        margin-bottom: 8px !important;
+    }
+
+    .pin-text {
+        text-align: right !important;
+    }
+
+    .rightColumn {
+        text-align: center !important;
+    }
+}
+
 
 .column {
     float: left;
